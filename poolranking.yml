@@ -1,3 +1,4 @@
+--- # API Gateway
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
@@ -26,7 +27,88 @@ spec:
     targetPort: 80
   selector:
     app: poolranking-api-gateway
+--- # Ranking
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: poolranking-ranking
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: poolranking-ranking
+    spec:
+      containers:
+      - name: poolranking-ranking
+        image: lthackathon2017.azurecr.io/rating-api:latest
+        ports:
+        - containerPort: 3000
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: poolranking-ranking
+spec:
+  ports:
+  - port: 3000
+  selector:
+    app: poolranking-ranking
+--- # Matches
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: poolranking-matches
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: poolranking-matches
+    spec:
+      containers:
+      - name: poolranking-matches
+        image: lthackathon2017.azurecr.io/poolranking-matches-api:20171103012757
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: poolranking-matches
+spec:
+  ports:
+  - port: 3010
+  selector:
+    app: poolranking-matches
+--- # Players
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: poolranking-players
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: poolranking-players
+    spec:
+      containers:
+      - name: poolranking-players
+        image: lthackathon2017.azurecr.io/poolranking-players-api:latest
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: poolranking-players
+spec:
+  ports:
+  - port: 3020
+  selector:
+    app: poolranking-players
+--- # React frontend
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
