@@ -1,9 +1,38 @@
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
+  name: poolranking-api-gateway
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: poolranking-api-gateway
+    spec:
+      containers:
+      - name: poolranking-api-gateway
+        image: lthackathon2017.azurecr.io/rankingapigateway:20171103124154
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: poolranking-api-gateway
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 3333
+    targetPort: 80
+  selector:
+    app: poolranking-api-gateway
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
   name: poolranking
 spec:
-  replicas: 3
+  replicas: 2
   strategy:
     rollingUpdate:
       maxSurge: 1
