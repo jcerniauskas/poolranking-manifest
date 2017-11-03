@@ -71,6 +71,12 @@ spec:
         image: lthackathon2017.azurecr.io/poolranking-matches-api:20171103012757
         ports:
         - containerPort: 80
+        env:
+          - name: COSMOSDB_CONNECTION_STRING
+          valueFrom:
+            secretKeyRef:
+              name: cosmosdb-connection-string
+              key: connection-string
 ---
 apiVersion: v1
 kind: Service
@@ -98,6 +104,12 @@ spec:
         image: lthackathon2017.azurecr.io/poolranking-players-api:latest
         ports:
         - containerPort: 80
+        env:
+          - name: COSMOSDB_CONNECTION_STRING
+          valueFrom:
+            secretKeyRef:
+              name: cosmosdb-connection-string
+              key: connection-string
 ---
 apiVersion: v1
 kind: Service
