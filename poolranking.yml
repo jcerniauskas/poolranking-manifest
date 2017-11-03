@@ -72,11 +72,16 @@ spec:
         ports:
         - containerPort: 80
         env:
-          - name: COSMOSDB_CONNECTION_STRING
+          - name: COSMOSDB_ENDPOINT
           valueFrom:
             secretKeyRef:
-              name: cosmosdb-connection-string
-              key: connection-string
+              name: cosmosdb
+              key: endpoint
+          - name: COSMOSDB_KEY
+          valueFrom:
+            secretKeyRef:
+              name: cosmosdb
+              key: key
 ---
 apiVersion: v1
 kind: Service
@@ -105,11 +110,16 @@ spec:
         ports:
         - containerPort: 80
         env:
-          - name: COSMOSDB_CONNECTION_STRING
+          - name: COSMOSDB_ENDPOINT
           valueFrom:
             secretKeyRef:
-              name: cosmosdb-connection-string
-              key: connection-string
+              name: cosmosdb
+              key: endpoint
+          - name: COSMOSDB_KEY
+          valueFrom:
+            secretKeyRef:
+              name: cosmosdb
+              key: key
 ---
 apiVersion: v1
 kind: Service
