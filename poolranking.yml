@@ -155,7 +155,7 @@ spec:
     spec:
       containers:
       - name: poolrankingclient
-        image: lthackathon2017.azurecr.io/poolrankingclient_client:latest3
+        image: lthackathon2017.azurecr.io/poolrankingclient_client:latest5
         ports:
         - containerPort: 3000
         resources:
@@ -163,6 +163,11 @@ spec:
             cpu: 250m
           limits:
             cpu: 500m
+        env:
+          - name: POOLRANKING_API_GATEWAY_EXTERNAL_SERVICE_HOST
+            value: "http://lthackathon2017api.westeurope.cloudapp.azure.com"
+          - name: POOLRANKING_API_GATEWAY_EXTERNAL_SERVICE_PORT
+            value: "3333"
 ---
 apiVersion: v1
 kind: Service
