@@ -28,6 +28,7 @@ spec:
   selector:
     app: poolranking-api-gateway
 --- # Ranking
+---
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
@@ -55,6 +56,7 @@ spec:
   selector:
     app: poolranking-ranking
 --- # Matches
+---
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
@@ -68,20 +70,20 @@ spec:
     spec:
       containers:
       - name: poolranking-matches
-        image: lthackathon2017.azurecr.io/poolranking-matches-api:20171103012757
+        image: lthackathon2017.azurecr.io/poolranking-matches-api:20171103041932
         ports:
         - containerPort: 80
         env:
           - name: COSMOSDB_ENDPOINT
-          valueFrom:
-            secretKeyRef:
-              name: cosmosdb
-              key: endpoint
+            valueFrom:
+              secretKeyRef:
+                name: cosmosdb
+                key: endpoint
           - name: COSMOSDB_KEY
-          valueFrom:
-            secretKeyRef:
-              name: cosmosdb
-              key: key
+            valueFrom:
+              secretKeyRef:
+                name: cosmosdb
+                key: key
 ---
 apiVersion: v1
 kind: Service
@@ -93,6 +95,7 @@ spec:
   selector:
     app: poolranking-matches
 --- # Players
+---
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
@@ -111,15 +114,15 @@ spec:
         - containerPort: 80
         env:
           - name: COSMOSDB_ENDPOINT
-          valueFrom:
-            secretKeyRef:
-              name: cosmosdb
-              key: endpoint
+            valueFrom:
+              secretKeyRef:
+                name: cosmosdb
+                key: endpoint
           - name: COSMOSDB_KEY
-          valueFrom:
-            secretKeyRef:
-              name: cosmosdb
-              key: key
+            valueFrom:
+              secretKeyRef:
+                name: cosmosdb
+                key: key
 ---
 apiVersion: v1
 kind: Service
@@ -131,6 +134,7 @@ spec:
   selector:
     app: poolranking-players
 --- # React frontend
+---
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
