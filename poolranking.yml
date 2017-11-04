@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
       - name: poolranking-api-gateway
-        image: lthackathon2017.azurecr.io/rankingapigateway:20171104102617
+        image: lthackathon2017.azurecr.io/rankingapigateway:20171104013229
         ports:
         - containerPort: 80
 ---
@@ -70,7 +70,7 @@ spec:
     spec:
       containers:
       - name: poolranking-matches
-        image: lthackathon2017.azurecr.io/poolranking-matches-api:20171104100339
+        image: lthackathon2017.azurecr.io/poolranking-matches-api:20171104012211
         ports:
         - containerPort: 80
         env:
@@ -110,7 +110,7 @@ spec:
     spec:
       containers:
       - name: poolranking-players
-        image: lthackathon2017.azurecr.io/poolranking-players-api:20171104095331
+        image: lthackathon2017.azurecr.io/poolranking-players-api:20171104012247
         ports:
         - containerPort: 80
         env:
