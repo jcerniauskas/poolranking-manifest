@@ -70,7 +70,7 @@ spec:
     spec:
       containers:
       - name: poolranking-matches
-        image: lthackathon2017.azurecr.io/poolranking-matches-api:20171103041932
+        image: lthackathon2017.azurecr.io/poolranking-matches-api:20171104074608
         ports:
         - containerPort: 80
         env:
@@ -78,12 +78,12 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: cosmosdb
-                key: endpoint
+                key: endpoint.txt
           - name: COSMOSDB_KEY
             valueFrom:
               secretKeyRef:
                 name: cosmosdb
-                key: key
+                key: key.txt
 ---
 apiVersion: v1
 kind: Service
@@ -109,7 +109,7 @@ spec:
     spec:
       containers:
       - name: poolranking-players
-        image: lthackathon2017.azurecr.io/poolranking-players-api:latest
+        image: lthackathon2017.azurecr.io/poolranking-players-api:20171104090145
         ports:
         - containerPort: 80
         env:
@@ -117,12 +117,12 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: cosmosdb
-                key: endpoint
+                key: endpoint.txt
           - name: COSMOSDB_KEY
             valueFrom:
               secretKeyRef:
                 name: cosmosdb
-                key: key
+                key: key.txt
 ---
 apiVersion: v1
 kind: Service
