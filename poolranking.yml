@@ -70,9 +70,9 @@ spec:
     spec:
       containers:
       - name: poolranking-matches
-        image: poolranking.azurecr.io/poolranking-matches-api:20171109115700
+        image: poolranking.azurecr.io/poolranking-matches-api:20171109021512
         ports:
-        - containerPort: 80
+        - containerPort: 3010
         env:
           - name: COSMOSDB_ENDPOINT
             valueFrom:
@@ -92,7 +92,6 @@ metadata:
 spec:
   ports:
   - port: 3010
-    targetPort: 80
   selector:
     app: poolranking-matches
 --- # Players
@@ -110,9 +109,9 @@ spec:
     spec:
       containers:
       - name: poolranking-players
-        image: poolranking.azurecr.io/poolranking-players-api:20171109121902
+        image: poolranking.azurecr.io/poolranking-players-api:20171109021255
         ports:
-        - containerPort: 80
+        - containerPort: 3020
         env:
           - name: COSMOSDB_ENDPOINT
             valueFrom:
@@ -132,7 +131,6 @@ metadata:
 spec:
   ports:
   - port: 3020
-    targetPort: 80
   selector:
     app: poolranking-players
 --- # React frontend
