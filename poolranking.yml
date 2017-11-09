@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
       - name: poolranking-api-gateway
-        image: lthackathon2017.azurecr.io/rankingapigateway:20171104013229
+        image: poolranking.azurecr.io/rankingapigateway:20171108072149
         ports:
         - containerPort: 80
 ---
@@ -42,7 +42,7 @@ spec:
     spec:
       containers:
       - name: poolranking-ranking
-        image: lthackathon2017.azurecr.io/rating-api:latest
+        image: poolranking.azurecr.io/rating-api:latest
         ports:
         - containerPort: 3000
 ---
@@ -70,7 +70,7 @@ spec:
     spec:
       containers:
       - name: poolranking-matches
-        image: lthackathon2017.azurecr.io/poolranking-matches-api:20171104012211
+        image: poolranking.azurecr.io/poolranking-matches-api:20171109115700
         ports:
         - containerPort: 80
         env:
@@ -110,7 +110,7 @@ spec:
     spec:
       containers:
       - name: poolranking-players
-        image: lthackathon2017.azurecr.io/poolranking-players-api:20171104012247
+        image: poolranking.azurecr.io/poolranking-players-api:20171109121902
         ports:
         - containerPort: 80
         env:
@@ -142,7 +142,7 @@ kind: Deployment
 metadata:
   name: poolranking
 spec:
-  replicas: 2
+  replicas: 1
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -155,7 +155,7 @@ spec:
     spec:
       containers:
       - name: poolrankingclient
-        image: lthackathon2017.azurecr.io/poolrankingclient_client:latest5
+        image: poolranking.azurecr.io/poolrankingclient_client:latest
         ports:
         - containerPort: 3000
         resources:
@@ -165,7 +165,7 @@ spec:
             cpu: 500m
         env:
           - name: POOLRANKING_API_GATEWAY_EXTERNAL_SERVICE_HOST
-            value: "http://lthackathon2017api.westeurope.cloudapp.azure.com"
+            value: "http://poolrankingapi.westeurope.cloudapp.azure.com"
           - name: POOLRANKING_API_GATEWAY_EXTERNAL_SERVICE_PORT
             value: "3333"
 ---
